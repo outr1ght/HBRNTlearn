@@ -7,7 +7,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        UserService userService = new UserServiceImpl();
+
+        //Закомментировано использование UserService через UserDaoJDBCImpl
+
+        /*UserService userService = new UserServiceImpl();
 
         userService.createUsersTable();
 
@@ -22,8 +25,26 @@ public class Main {
         }
 
         userService.cleanUsersTable();
-        userService.dropUsersTable();
+        userService.dropUsersTable();*/
 
+        /*
+        Использование UserService через UserDaoHibernateImpl
+         */
+
+        UserService userService = new UserServiceImpl();
+
+        userService.createUsersTable();
+        userService.saveUser("Peter", "Laiv", (byte) 30);
+
+        userService.removeUserById(1);
+
+        List<User> userList = userService.getAllUsers();
+        for (User u : userList) {
+            System.out.println(u);
+        }
+
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
 
     }
 }
